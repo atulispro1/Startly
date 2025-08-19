@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Start Your Startup - Balanced CSS + Minimal JS</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <style>
+    /* Basic styling */
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      margin: 0;
+      background: #121c2c;
+      color: #cfd8e6;
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    h1 {
+      text-align: center;
+      color: #4aa3cc;
+      font-weight: 900;
+      font-size: 2.8rem;
+      margin-bottom: 0.2em;
+      text-shadow: 0 0 6px rgba(74, 163, 204, 0.4);
+    }
+    p.intro {
+      max-width: 700px;
+      margin: 0 auto 2.5em;
+      font-size: 1.3rem;
+      text-align: center;
+      color: #a3b5c7;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      padding-bottom: 40px;
+    }
+
+    .box {
+      background: #1b2838;
+      border: 2px solid rgba(74, 163, 204, 0.4);
+      border-radius: 12px;
+      padding: 20px 25px;
+      box-shadow: 0 0 10px rgba(74, 163, 204, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+    .box.animated {
+      opacity: 1;
+      transform: translateY(0);
+      animation: fadeSlideIn 0.6s ease forwards;
+    }
+    /* stagger animation delay by JS inline style */
+
+    .box:hover, .box:focus-within {
+      box-shadow: 0 0 18px rgba(74, 163, 204, 0.35);
+      border-color: rgba(74, 163, 204, 0.7);
+      transform: translateY(0) scale(1.03);
+      outline: none;
+    }
+
+    .box h2 {
+      margin-top: 0;
+      margin-bottom: 0.7em;
+      color: #4aa3cc;
+      font-size: 1.6rem;
+      filter: drop-shadow(0 0 2px rgba(74, 163, 204, 0.3));
+      user-select: text;
+    }
+
+    .box ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 0;
+      margin-bottom: 1.3em;
+    }
+
+    .box li {
+      margin-bottom: 0.7em;
+      font-size: 1rem;
+      user-select: text;
+    }
+
+    .box li strong {
+      color: #75aecf;
+    }
+
+    .box li a {
+      color: #7db1da;
+      text-decoration: none;
+      border-bottom: 1px dotted #7db1da;
+      user-select: text;
+      cursor: pointer;
+      transition: color 0.25s ease, border-bottom-style 0.25s ease;
+    }
+    .box li a:hover, .box li a:focus {
+      color: #a0ccef;
+      border-bottom-style: solid;
+      outline: none;
+    }
+
+    /* Explore More button */
+    .explore-btn {
+      align-self: flex-start;
+      padding: 10px 22px;
+      background: linear-gradient(90deg, #4aa3cc, #2c7a9d);
+      color: #e0e7f1;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(74, 163, 204, 0.3);
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+      outline: none;
+      position: relative;
+      transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+    .explore-btn:hover, .explore-btn:focus {
+      background: #3e8fba;
+      color: #e6f2ff;
+      box-shadow: 0 0 16px rgba(74, 163, 204, 0.6), 0 0 28px rgba(74, 163, 204, 0.8);
+      outline: none;
+      transform: scale(1.05);
+    }
+    .explore-btn.pulse {
+      animation: pulseGlow 2.5s ease-in-out infinite;
+    }
+    .site-footer {
+    background-color: #1b2838;
+    color: #a3b5c7;
+    padding: 30px 20px 15px;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+  .footer-container {
+    max-width: 1100px;
+    margin: 0 auto 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .footer-about {
+    flex: 1 1 280px;
+    max-width: 350px;
+  }
+  .footer-about h3 {
+    color: #4aa3cc;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .footer-nav {
+    flex: 1 1 220px;
+  }
+  .footer-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .footer-nav ul li a {
+    color: #a3b5c7;
+    text-decoration: none;
+    border-bottom: 1px dotted transparent;
+    transition: border-color 0.2s ease;
+  }
+  .footer-nav ul li a:hover,
+  .footer-nav ul li a:focus {
+    border-bottom-color: #4aa3cc;
+    outline: none;
+  }
+
+  .footer-social {
+    flex: 1 1 200px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  .social-link {
+    color: #a3b5c7;
+    text-decoration: none;
+    border: 1px solid #4aa3cc;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-block;
+  }
+  .social-link:hover,
+  .social-link:focus {
+    background-color: #4aa3cc;
+    color: #121c2c;
+    outline: none;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #728196;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-about,
+    .footer-nav,
+    .footer-social {
+      max-width: none;
+      flex-basis: auto;
+    }
+    .footer-social {
+      justify-content: center;
+      margin-top: 15px;
+    }
+  }
+
+    /* Animations */
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 8px rgba(74, 163, 204, 0.3), 0 0 20px rgba(74, 163, 204, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 16px rgba(74, 163, 204, 0.6), 0 0 28px rgba(74, 163, 204, 0.8);
+      }
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      .box h2 {
+        font-size: 1.3rem;
+      }
+      .box li {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Start Your Startup Journey</h1>
+  <p class="intro">
+    The world is full of exciting ways to launch your startup and start earning — from selling products, freelancing, innovating with apps, teaching, and more.
+    Explore the diverse options below to find what fits your passion and skills, and take your first step towards financial freedom and entrepreneurial success!
+  </p>
+
+  <div class="container" id="boxes-container" role="list">
+    <div class="box" tabindex="0" role="listitem" aria-labelledby="selling-products-h2" id="selling-products">
+      <h2 id="selling-products-h2">Selling Products<br /><small>(Physical or Digital)</small></h2>
+      <ul>
+        <li><strong><a href="https://www.shopify.com/" target="_blank" rel="noopener noreferrer">Shopify</a></strong> – Build an online store easily, no coding needed.</li>
+        <li><strong><a href="https://www.etsy.com/" target="_blank" rel="noopener noreferrer">Etsy</a></strong> – Perfect for handmade, creative, or unique goods.</li>
+        <li><strong><a href="https://sell.amazon.in/" target="_blank" rel="noopener noreferrer">Amazon Seller Central</a></strong> – Reach millions by mass-selling products.</li>
+        <li><strong><a href="https://gumroad.com/" target="_blank" rel="noopener noreferrer">Gumroad</a></strong> – Ideal for digital products like ebooks, courses, and templates.</li>
+      </ul>
+    </div>
+
+    <div class="box" tabindex="0" role="listitem" aria-labelledby="freelance-services-h2" id="freelance-services">
+      <h2 id="freelance-services-h2">Freelance & Services</h2>
+      <ul>
+        <li><strong><a href="https://www.fiverr.com/" target="_blank" rel="noopener noreferrer">Fiverr</a></strong> – Offer freelance services from design to marketing.</li>
+        <li><strong><a href="https://www.upwork.com/" target="_blank" rel="noopener noreferrer">Upwork</a></strong> – Connect with clients worldwide for high-value projects.</li>
+        <li><strong><a href="https://www.toptal.com/" target="_blank" rel="noopener noreferrer">Toptal</a></strong> – Join a premium, selective freelance community.</li>
+        <li><strong><a href="https://www.skillshare.com/" target="_blank"rel="noopener noreferrer">Skillshare</a></strong> – Teach creative ortechnical skills to students.</li>
+        <li><strong><a href="https://www.etsy.com/" target="_blank" rel="noopener noreferrer">Etsy</a></strong> – Perfect for handmade, creative, or unique goods.</li>
+         
+      </ul>
+    </div>
+
+    <div class="box" tabindex="0" role="listitem" aria-labelledby="teaching-courses-h2" id="teaching-courses">
+      <h2 id="teaching-courses-h2">Teaching & Courses</h2>
+      <ul>
+        <li><strong><a href="https://www.udemy.com/" target="_blank" rel="noopener noreferrer">Udemy</a></strong> – Create and sell courses online.</li>
+        <li><strong><a href="https://www.skillshare.com/" target="_blank" rel="noopener noreferrer">Skillshare</a></strong> – Teach creative or technical skills to students.</li>
+        <li><strong><a href="https://teachable.com/" target="_blank" rel="noopener noreferrer">Teachable</a></strong> – Build your own branded course website.</li>
+        <li><strong><a href="https://www.fiverr.com/" target="_blank" rel="noopener noreferrer">Fiverr</a></strong> – Offer freelance services from design to marketing.</li>
+        <li><strong><a href="https://www.toptal.com/" target="_blank" rel="noopener noreferrer">Toptal</a></strong> – Join a premium, selective freelance community.</li>
+      </ul>
+    </div>
+
+    <div class="box" tabindex="0" role="listitem" aria-labelledby="software-apps-h2" id="software-apps">
+      <h2 id="software-apps-h2">Software / Apps</h2>
+      <ul>
+        <li><strong><a href="https://www.producthunt.com/" target="_blank" rel="noopener noreferrer">Product Hunt</a></strong> – Launch your app or software to early adopters.</li>
+        <li><strong><a href="https://github.com/sponsors" target="_blank" rel="noopener noreferrer">GitHub Sponsors</a></strong> – Monetize open-source software projects.</li>
+        <li><strong><a href="https://play.google.com/console/about/" target="_blank" rel="noopener noreferrer">Google Play Store</a></strong> / <a href="#" target="_blank" rel="noopener noreferrer">Apple App Store</a> – Sell mobile apps worldwide.</li>
+      </ul>
+
+    </div>
+
+    <div class="box" tabindex="0" role="listitem" aria-labelledby="content-audience-h2" id="content-audience">
+      <h2 id="content-audience-h2">Content & Audience Monetization</h2>
+      <ul>
+        <li><strong><a href="https://www.youtube.com/creators/" target="_blank" rel="noopener noreferrer">YouTube Partner Program</a></strong> – Earn via ads, memberships, and sponsorships.</li>
+        <li><strong><a href="https://www.patreon.com/" target="_blank" rel="noopener noreferrer">Patreon</a></strong> – Offer premium content to paying subscribers.</li>
+        <li><strong><a href="https://substack.com/" target="_blank" rel="noopener noreferrer">Substack</a></strong> – Monetize paid newsletters and build loyal readers.</li>
+      </ul>
+    </div>
+  </div>
+  <br>
+  <br>
+  <footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-about">
+      <h3>StartupX</h3>
+      <p>Your partner in launching and growing your entrepreneurial dreams. Explore, build, and succeed with us.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer Navigation">
+      <ul>
+        <li><a href="index.html" tabindex="0">Home</a></li>
+        <li><a href="features.html" tabindex="0">Features</a></li>
+        <li><a href="startup dashboard.html" tabindex="0">Dashboard</a></li>
+        <li><a href="contact.html" tabindex="0">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-social">
+      <a href="#" aria-label="Follow on Twitter" tabindex="0" class="social-link">Twitter</a>
+      <a href="#" aria-label="Follow on LinkedIn" tabindex="0" class="social-link">LinkedIn</a>
+      <a href="#" aria-label="Follow on Facebook" tabindex="0" class="social-link">Facebook</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 StartupX. All rights reserved.
+  </div>
+</footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Animate boxes with staggered delay by adding 'animated' class
+      const boxes = document.querySelectorAll('.box');
+      boxes.forEach((box, i) => {
+        setTimeout(() => {
+          box.classList.add('animated');
+        }, i * 150);
+      });
+
+      // Add pulsing animation class to buttons (CSS keyframes)
+      const buttons = document.querySelectorAll('.explore-btn');
+      buttons.forEach(btn => {
+        btn.classList.add('pulse');
+        // Button click demo alert
+      });
+    });
+  </script>
+</body>
+</html>

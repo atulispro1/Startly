@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Funding Resources - StartupX</title>
+<link rel="icon" type="image/png" href="logo.png" />
+<style>
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+body {
+  margin: 0;
+  background-color: #121c2c;
+  color: #cfd8e6;
+  line-height: 1.6;
+}
+h1, h2 {
+  color: #4aa3cc;
+}
+a {
+  color: #7db1da;
+  text-decoration: none;
+}
+a:hover {
+  color: #a0ccef;
+  border-bottom: 1px solid #a0ccef;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 40px 20px 20px;
+}
+header h1 {
+  font-size: 2.5rem;
+  text-shadow: 0 0 6px rgba(74,163,204,0.4);
+  margin-bottom: 0.4em;
+}
+header p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  color: #a3b5c7;
+}
+
+/* Boxes Grid */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  padding: 40px 20px;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.card {
+  background: #1b2838;
+  border: 2px solid rgba(74, 163, 204, 0.4);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(74,163,204,0.15);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card.animated {
+  animation: fadeUp 0.6s ease forwards;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 18px rgba(74,163,204,0.35);
+  border-color: rgba(74,163,204,0.7);
+}
+
+/* Card Content */
+.card h2 {
+  margin-top: 0;
+  font-size: 1.22rem;
+}
+.card ul {
+  list-style: none;
+  padding-left: 0;
+}
+.card li {
+  margin-bottom: 10px;
+  font-size: 0.96rem;
+}
+
+/* Button */
+.explore-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 18px;
+  background: linear-gradient(90deg, #4aa3cc, #2c7a9d);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 30px;
+  box-shadow: 0 0 8px rgba(74,163,204,0.3);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.explore-btn:hover {
+  background: #3e8fba;
+  transform: scale(1.05);
+}
+
+/* Animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* Footer */
+.site-footer {
+  background-color: #1b2838;
+  color: #a3b5c7;
+  padding: 30px 20px 15px;
+  font-size: 0.9rem;
+  user-select: none;
+}
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+.footer-about {
+  flex: 1 1 280px;
+  max-width: 350px;
+}
+.footer-about h3 {
+  color: #4aa3cc;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.footer-nav {
+  flex: 1 1 220px;
+}
+.footer-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.footer-nav ul li a {
+  color: #a3b5c7;
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  transition: border-color 0.2s ease;
+}
+.footer-nav ul li a:hover,
+.footer-nav ul li a:focus {
+  border-bottom-color: #4aa3cc;
+  outline: none;
+}
+.footer-social {
+  flex: 1 1 200px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.social-link {
+  color: #a3b5c7;
+  text-decoration: none;
+  border: 1px solid #4aa3cc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+.social-link:hover,
+.social-link:focus {
+  background-color: #4aa3cc;
+  color: #121c2c;
+  outline: none;
+}
+.footer-bottom {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #728196;
+}
+@media (max-width: 700px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-about, .footer-nav, .footer-social {
+    max-width: none;
+    flex-basis: auto;
+  }
+  .footer-social {
+    justify-content: center;
+    margin-top: 15px;
+  }
+}
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 2rem;
+  }
+  .card h2 {
+    font-size: 1.05rem;
+  }
+  .container {
+    padding: 20px 5px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ====== Header ====== -->
+<header>
+  <h1>Funding Resources</h1>
+  <p>
+    Discover trusted funding options to turn your startup vision into reality.
+    From investors to grants to crowdfunding, find the best fit for your growth journey.
+  </p>
+</header>
+
+<!-- ====== Funding Categories ====== -->
+<div class="container">
+  <div class="card">
+    <h2>Angel & Venture Capital</h2>
+    <ul>
+      <li><strong><a href="https://angel.co/" target="_blank">AngelList</a></strong> – Connect with angel investors worldwide.</li>
+      <li><strong><a href="https://www.seedinvest.com/" target="_blank">SeedInvest</a></strong> – Equity crowdfunding for startups.</li>
+      <li><strong><a href="https://www.ycombinator.com/" target="_blank">Y Combinator</a></strong> – Seed funding and accelerator.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Crowdfunding</h2>
+    <ul>
+      <li><strong><a href="https://www.kickstarter.com/" target="_blank">Kickstarter</a></strong> – Launch creative projects and products.</li>
+      <li><strong><a href="https://www.indiegogo.com/" target="_blank">Indiegogo</a></strong> – Flexible funding for innovation.</li>
+      <li><strong><a href="https://www.gofundme.com/" target="_blank">GoFundMe</a></strong> – Community-powered fundraising.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Grants & Competitions</h2>
+    <ul>
+      <li><strong><a href="https://www.startupindia.gov.in/" target="_blank">Startup India Grants</a></strong> – Government programs for Indian startups.</li>
+      <li><strong><a href="https://www.sbir.gov/" target="_blank">SBIR Program</a></strong> – US government innovation grants.</li>
+      <li><strong><a href="https://startup.google.com/" target="_blank">Google for Startups</a></strong> – Resources & support for entrepreneurs.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Lending & Loans</h2>
+    <ul>
+      <li><strong><a href="https://www.sba.gov/" target="_blank">SBA Loans</a></strong> – Small business loans (US).</li>
+      <li><strong><a href="https://www.kiva.org/" target="_blank">Kiva</a></strong> – Global crowdfunded microloans.</li>
+    </ul>
+  </div>
+
+  <!-- BOX 5: Startup How-To Guides -->
+  <div class="card">
+    <h2>Startup How-To Guides</h2>
+    <ul>
+      <li><strong><a href="#">How to Write a Great Pitch Deck</a></strong> – Tips & structure for investor decks.</li>
+      <li><strong><a href="#">How to Apply for Grants</a></strong> – Steps and checklists for non-dilutive funding.</li>
+      <li><strong><a href="#">Crowdfunding Success Tips</a></strong> – Maximize your campaign results.</li>
+      <li><strong><a href="#">Understanding Startup Valuation</a></strong> – Basics for founders.</li>
+    </ul>
+  </div>
+
+  <!-- BOX 6: Templates & Downloads -->
+  <div class="card">
+    <h2>Templates & Downloads</h2>
+    <ul>
+      <li><strong><a href="#">Pitch Deck Template (PPT)</a></strong> – Build your story for investors.</li>
+      <li><strong><a href="#">Investor Email Template</a></strong> – Reach out with impact.</li>
+      <li><strong><a href="#">Business Plan Outline</a></strong> – Step-by-step for your business.</li>
+      <li><strong><a href="#">Financial Projection Sheet</a></strong> – Plan your runway.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ====== Footer ====== -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-about">
+      <h3>StartupX</h3>
+      <p>Your partner in launching and growing your entrepreneurial dreams. Explore, build, and succeed with us.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer Navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="startup dashboard.html">Dashboard</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-social">
+      <a href="#" aria-label="Follow on Twitter" class="social-link">Twitter</a>
+      <a href="#" aria-label="Follow on LinkedIn" class="social-link">LinkedIn</a>
+      <a href="#" aria-label="Follow on Facebook" class="social-link">Facebook</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 StartupX. All rights reserved.
+  </div>
+</footer>
+
+<script>
+// Animate card fade-in on page load
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card').forEach((card, i) => {
+    setTimeout(() => {
+      card.classList.add('animated');
+    }, i * 150);
+  });
+});
+</script>
+</body>
+</html>

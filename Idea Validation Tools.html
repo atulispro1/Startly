@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Idea Validation Tools - StartupX</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    body {
+      margin: 0;
+      background: #121c2c;
+      color: #cfd8e6;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #4aa3cc;
+    }
+    a {
+      color: #7db1da;
+      text-decoration: none;
+    }
+    a:hover, a:focus {
+      color: #a0ccef;
+      outline: none;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      text-shadow: 0 0 6px rgba(74,163,204,0.4);
+      margin-bottom: 0.3em;
+    }
+    header p {
+      max-width: 700px;
+      margin: 0 auto 2.5em;
+      font-size: 1.2rem;
+      color: #a3b5c7;
+    }
+    section {
+      max-width: 1100px;
+      margin: 0 auto 40px;
+      padding: 0 20px;
+    }
+    section h2 {
+      margin-bottom: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: #1b2838;
+      padding: 20px;
+      border: 2px solid rgba(74,163,204,0.4);
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(74,163,204,0.15);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card.animated {
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 18px rgba(74,163,204,0.35);
+      border-color: rgba(74,163,204,0.7);
+      cursor: pointer;
+    }
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #4aa3cc;
+      font-size: 1.25rem;
+    }
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .card li {
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+    .card li a {
+      color: #7db1da;
+      text-decoration: none;
+      border-bottom: 1px dotted #7db1da;
+      transition: color 0.25s ease, border-bottom-style 0.25s ease;
+    }
+    .card li a:hover, .card li a:focus {
+      color: #a0ccef;
+      border-bottom-style: solid;
+    }
+    .explore-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 24px;
+      background: linear-gradient(90deg,#4aa3cc,#2c7a9d);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 30px;
+      box-shadow: 0 0 8px rgba(74,163,204,0.3);
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .explore-btn:hover, .explore-btn:focus {
+      background: #3e8fba;
+      transform: scale(1.05);
+    }
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(40px);}
+      to   {opacity: 1; transform: translateY(0);}
+    }
+    .site-footer {
+      background-color: #1b2838;
+      color: #a3b5c7;
+      padding: 30px 20px 15px;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto 15px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .footer-about {
+      flex: 1 1 280px;
+      max-width: 350px;
+    }
+    .footer-about h3 {
+      color: #4aa3cc;
+      margin-bottom: 10px;
+    }
+    .footer-nav {
+      flex: 1 1 220px;
+    }
+    .footer-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .footer-nav ul li a {
+      color: #a3b5c7;
+      border-bottom: 1px dotted transparent;
+    }
+    .footer-nav ul li a:hover {
+      border-bottom-color: #4aa3cc;
+    }
+    .footer-social {
+      flex: 1 1 200px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    .social-link {
+      color: #a3b5c7;
+      text-decoration: none;
+      border: 1px solid #4aa3cc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .social-link:hover {
+      background-color: #4aa3cc;
+      color: #121c2c;
+    }
+    .footer-bottom {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #728196;
+    }
+    @media (max-width: 700px) {
+      .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .footer-social {
+        justify-content: center;
+        margin-top: 15px;
+      }
+    }
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header>
+    <h1>Idea Validation Tools</h1>
+    <p>Run customer surveys, market tests, and landing page experiments to validate your startup idea fast. Discover the best platforms to get real feedback before you launch.</p>
+  </header>
+
+  <!-- ===== Validation Tools Grid ===== -->
+  <section>
+    <div class="grid">
+      <div class="card">
+        <h3>Customer Surveys & Feedback</h3>
+        <ul>
+          <li><a href="https://typeform.com/" target="_blank" rel="noopener noreferrer">Typeform</a> – Interactive forms and surveys with great UX.</li>
+          <li><a href="https://surveymonkey.com/" target="_blank" rel="noopener noreferrer">SurveyMonkey</a> – Powerful survey platform for research and fast feedback.</li>
+          <li><a href="https://userinterviews.com/" target="_blank" rel="noopener noreferrer">User Interviews</a> – Connect with real users for deeper research and interviews.</li>
+        </ul>
+        <a href="https://typeform.com/" target="_blank" rel="noopener noreferrer" class="explore-btn">Start a Survey</a>
+      </div>
+
+      <div class="card">
+        <h3>Market Testing</h3>
+        <ul>
+          <li><a href="https://pollfish.com/" target="_blank" rel="noopener noreferrer">Pollfish</a> – Quick market polls to targeted audiences.</li>
+          <li><a href="https://www.google.com/insights/consumersurveys/home" target="_blank" rel="noopener noreferrer">Google Consumer Surveys</a> – Insights from Google’s massive reach.</li>
+          <li><a href="https://askable.com/" target="_blank" rel="noopener noreferrer">Askable</a> – Recruit test users and run market research panels.</li>
+        </ul>
+        <a href="https://pollfish.com/" target="_blank" rel="noopener noreferrer" class="explore-btn">Run a Market Test</a>
+      </div>
+
+      <div class="card">
+        <h3>Landing Page Experiments</h3>
+        <ul>
+          <li><a href="https://unbounce.com/" target="_blank" rel="noopener noreferrer">Unbounce</a> – Quickly build and test landing pages for MVPs.</li>
+          <li><a href="https://www.carrd.co/" target="_blank" rel="noopener noreferrer">Carrd</a> – Fast, simple one-page sites for idea validation.</li>
+          <li><a href="https://www.getresponse.com/features/landing-page-creator" target="_blank" rel="noopener noreferrer">GetResponse Landing Pages</a> – Integrated page editor and analytics.</li>
+        </ul>
+        <a href="https://unbounce.com/" target="_blank" rel="noopener noreferrer" class="explore-btn">Test a Landing Page</a>
+      </div>
+
+      <div class="card">
+        <h3>Rapid MVP Prototyping</h3>
+        <ul>
+          <li><a href="https://bubble.io/" target="_blank" rel="noopener noreferrer">Bubble</a> – Build fully interactive web apps without code.</li>
+          <li><a href="https://glideapps.com/" target="_blank" rel="noopener noreferrer">Glide Apps</a> – Create mobile app MVPs using Google Sheets.</li>
+          <li><a href="https://www.figma.com/" target="_blank" rel="noopener noreferrer">Figma</a> – Design clickable prototypes to validate flows.</li>
+        </ul>
+        <a href="https://bubble.io/" target="_blank" rel="noopener noreferrer" class="explore-btn">Prototype Your MVP</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>StartupX</h3>
+        <p>Your partner in launching and growing your entrepreneurial dreams. Explore, build, and succeed with us.</p>
+      </div>
+    <nav class="footer-nav" aria-label="Footer Navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="startup dashboard.html">Dashboard</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+      <div class="footer-social">
+        <a href="#" aria-label="Follow on Twitter" class="social-link">Twitter</a>
+        <a href="#" aria-label="Follow on LinkedIn" class="social-link">LinkedIn</a>
+        <a href="#" aria-label="Follow on Facebook" class="social-link">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 StartupX. All rights reserved.</div>
+  </footer>
+
+  <!-- ===== Minimal JS for Fade-in Animation ===== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.card').forEach((card, i) => {
+        setTimeout(() => { card.classList.add('animated'); }, i * 150);
+      });
+    });
+  </script>
+</body>
+</html>

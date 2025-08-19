@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Startly — Sign in/ Signup</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+
+  <!-- Main neon style -->
+  <link rel="stylesheet" href="login.css" />
+
+  <!-- Google Fonts Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Floating neon squares background -->
+  <div class="bg" id="bg">
+    <div class="sq s1"></div>
+    <div class="sq s2"></div>
+    <div class="sq s3"></div>
+    <div class="sq s4"></div>
+    <div class="sq s5"></div>
+    <div class="sq s6"></div>
+    <div class="sq s7"></div>
+    <div class="sq s8"></div>
+  </div>
+
+  <!-- Neon animated background particles canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Main wrapper & auth container -->
+  <div class="wrap">
+    <div class="auth" id="auth">
+      <!-- Mobile Toggle Buttons -->
+    <div class="mobile-toggle">
+      <button id="mobileSignInBtn" class="active">Sign In</button>
+      <button id="mobileSignUpBtn">Sign Up</button>
+    </div>
+
+
+      <!-- Sign In Panel -->
+      <div class="panel sign-in">
+        <div class="card">
+          <h2>Sign in to Startly</h2>
+          <p class="lead">or use your email account</p>
+
+          <div class="socials">
+            <button aria-label="facebook">f</button>
+            <button aria-label="google">G+</button>
+            <button aria-label="linkedin">in</button>
+          </div>
+
+          <div class="field"><input placeholder="Email" type="email" /></div>
+          <div class="field"><input placeholder="Password" type="password" /></div>
+
+          <div class="link-row">
+            <span class="muted">Forgot your password?</span>
+            <a href="#" style="font-size:13px; color:var(--neon-c1)">Help</a>
+          </div>
+
+          <div class="cta">
+            <button class="btn-primary">Sign In</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sign Up Panel -->
+      <div class="panel sign-up">
+        <div class="card">
+          <h2>Create Account</h2>
+          <p class="lead">or use your email for registration</p>
+
+          <div class="field"><input placeholder="Name" type="text" /></div>
+          <div class="field"><input placeholder="Email" type="email" /></div>
+          <div class="field"><input placeholder="Password" type="password" /></div>
+
+          <div class="link-row">
+            <span class="muted">Forgot your Password?</span>
+            <a href="#" style="font-size:13px; color:var(--neon-c1)">Help</a>
+          </div>
+
+          <div class="cta">
+            <button class="btn-primary">Sign Up</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overlay Panels -->
+      <div class="overlay-wrap">
+        <div class="overlay" id="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1>Welcome Back!</h1>
+            <p>To keep connected with us please login with your personal info</p>
+            <button class="ghost" id="btnSignIn">Sign In</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h1>Hello, Friend!</h1>
+            <p>Enter your personal details and start your journey</p>
+            <button class="ghost" id="btnSignUp">Sign Up</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Load JS -->
+  <script src="script.js"></script>
+</body>
+</html>

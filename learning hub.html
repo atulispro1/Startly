@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learning Hub - StartupX</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <style>
+    /* ===== Global Styles ===== */
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    body {
+      margin: 0;
+      background: #121c2c;
+      color: #cfd8e6;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #4aa3cc;
+    }
+    a {
+      color: #7db1da;
+      text-decoration: none;
+    }
+    a:hover, a:focus {
+      color: #a0ccef;
+      outline: none;
+    }
+    
+    /* ===== Header ===== */
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      text-shadow: 0 0 6px rgba(74, 163, 204, 0.4);
+      margin-bottom: 0.3em;
+    }
+    header p {
+      max-width: 700px;
+      margin: 0 auto 2.5em;
+      font-size: 1.2rem;
+      color: #a3b5c7;
+    }
+
+    /* ===== Sections ===== */
+    section {
+      max-width: 1100px;
+      margin: 0 auto 40px;
+      padding: 0 20px;
+    }
+    section h2 {
+      margin-bottom: 20px;
+    }
+
+    /* ===== Grid & Cards ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: #1b2838;
+      padding: 20px;
+      border: 2px solid rgba(74, 163, 204, 0.4);
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(74, 163, 204, 0.15);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card.animated {
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 18px rgba(74, 163, 204, 0.35);
+      border-color: rgba(74, 163, 204, 0.7);
+      cursor: pointer;
+    }
+
+    /* Card titles */
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #4aa3cc;
+      font-size: 1.4rem;
+    }
+
+    /* Lists */
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 15px;
+    }
+    .card li {
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+    .card li a {
+      color: #7db1da;
+      text-decoration: none;
+      border-bottom: 1px dotted #7db1da;
+      transition: color 0.25s ease, border-bottom-style 0.25s ease;
+    }
+    .card li a:hover, .card li a:focus {
+      color: #a0ccef;
+      border-bottom-style: solid;
+    }
+
+    /* Buttons */
+    .explore-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 24px;
+      background: linear-gradient(90deg, #4aa3cc, #2c7a9d);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 30px;
+      box-shadow: 0 0 8px rgba(74, 163, 204, 0.3);
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .explore-btn:hover, .explore-btn:focus {
+      background: #3e8fba;
+      transform: scale(1.05);
+      outline: none;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: #1b2838;
+      color: #a3b5c7;
+      padding: 30px 20px 15px;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto 15px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .footer-about {
+      flex: 1 1 280px;
+      max-width: 350px;
+    }
+    .footer-about h3 {
+      color: #4aa3cc;
+      margin-bottom: 10px;
+    }
+    .footer-nav {
+      flex: 1 1 220px;
+    }
+    .footer-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .footer-nav ul li a {
+      color: #a3b5c7;
+      border-bottom: 1px dotted transparent;
+    }
+    .footer-nav ul li a:hover {
+      border-bottom-color: #4aa3cc;
+    }
+    .footer-social {
+      flex: 1 1 200px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    .social-link {
+      color: #a3b5c7;
+      text-decoration: none;
+      border: 1px solid #4aa3cc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .social-link:hover {
+      background-color: #4aa3cc;
+      color: #121c2c;
+    }
+    .footer-bottom {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #728196;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .footer-social {
+        justify-content: center;
+        margin-top: 15px;
+      }
+    }
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header>
+    <h1>Learning Hub</h1>
+    <p>Curated courses, startup playbooks, founder toolkits, and much more to help you grow smarter and faster.</p>
+  </header>
+
+  <!-- ===== Curated Courses ===== -->
+  <section>
+    <h2>Curated Courses</h2>
+    <div class="card">
+      <h3>Recommended Online Courses</h3>
+      <ul>
+        <li><a href="https://www.coursera.org/specializations/wharton-entrepreneurship" target="_blank" rel="noopener noreferrer">Wharton Entrepreneurship Specialization (Coursera)</a></li>
+        <li><a href="https://www.udemy.com/course/how-to-start-a-startup/" target="_blank" rel="noopener noreferrer">How to Start a Startup (Udemy)</a></li>
+        <li><a href="https://foundr.com/courses" target="_blank" rel="noopener noreferrer">Foundr's Startup Courses</a></li>
+        <li><a href="https://startupschool.org/" target="_blank" rel="noopener noreferrer">Startup School by Y Combinator</a></li>
+      </ul>
+      <a href="https://www.coursera.org/specializations/wharton-entrepreneurship" target="_blank" rel="noopener noreferrer" class="explore-btn">Explore More Courses</a>
+    </div>
+  </section>
+
+  <!-- ===== Startup Playbooks ===== -->
+  <section>
+    <h2>Startup Playbooks</h2>
+    <div class="card">
+      <h3>Essential Guides to Building Your Startup</h3>
+      <ul>
+        <li><a href="https://www.ycombinator.com/library/4A-how-to-start-a-startup" target="_blank" rel="noopener noreferrer">How to Start a Startup (Y Combinator)</a></li>
+        <li><a href="https://firstround.com/review/" target="_blank" rel="noopener noreferrer">First Round Review Playbooks</a></li>
+        <li><a href="https://www.openviewpartners.com/startup-playbook/" target="_blank" rel="noopener noreferrer">OpenView Startup Playbook</a></li>
+        <li><a href="https://blog.growthhackers.com/growth-hacking-playbook-b4c899323d0a" target="_blank" rel="noopener noreferrer">Growth Hacking Playbook</a></li>
+      </ul>
+      <a href="https://www.ycombinator.com/library/4A-how-to-start-a-startup" target="_blank" rel="noopener noreferrer" class="explore-btn">Explore More Playbooks</a>
+    </div>
+  </section>
+
+  <!-- ===== Founder Toolkits ===== -->
+  <section>
+    <h2>Founder Toolkits</h2>
+    <div class="card">
+      <h3>Tools & Templates for Founders</h3>
+      <ul>
+        <li><a href="https://foundr.com/startup-toolkit" target="_blank" rel="noopener noreferrer">Foundr's Ultimate Startup Toolkit</a></li>
+        <li><a href="https://www.slidemodel.com/templates/startup-pitch-deck/" target="_blank" rel="noopener noreferrer">Startup Pitch Deck Templates</a></li>
+        <li><a href="https://www.score.org/resource/business-planning-financial-statements-template-gallery" target="_blank" rel="noopener noreferrer">Financial Planning & Business Templates (SCORE)</a></li>
+        <li><a href="https://asana.com/templates/startup" target="_blank" rel="noopener noreferrer">Startup Project Management Templates (Asana)</a></li>
+      </ul>
+      <a href="https://foundr.com/startup-toolkit" target="_blank" rel="noopener noreferrer" class="explore-btn">Explore Founder Toolkits</a>
+    </div>
+  </section>
+
+  <!-- ===== More Resources ===== -->
+  <section>
+    <h2>And Much More...</h2>
+    <div class="card">
+      <h3>Additional Resources</h3>
+      <ul>
+        <li><a href="https://www.producthunt.com/" target="_blank" rel="noopener noreferrer">Product Hunt - Discover New Tools & Startups</a></li>
+        <li><a href="https://www.reddit.com/r/startups/" target="_blank" rel="noopener noreferrer">Reddit Startups Community</a></li>
+        <li><a href="https://www.indiehackers.com/" target="_blank" rel="noopener noreferrer">Indie Hackers - Stories & Advice</a></li>
+        <li><a href="https://www.ted.com/topics/entrepreneur" target="_blank" rel="noopener noreferrer">TED Talks: Entrepreneurship</a></li>
+      </ul>
+      <a href="https://www.producthunt.com/" target="_blank" rel="noopener noreferrer" class="explore-btn">Explore More Resources</a>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>StartupX</h3>
+        <p>Your partner in launching and growing your entrepreneurial dreams. Explore, build, and succeed with us.</p>
+      </div>
+    <nav class="footer-nav" aria-label="Footer Navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="startup dashboard.html">Dashboard</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+      <div class="footer-social">
+        <a href="#" aria-label="Follow on Twitter" class="social-link">Twitter</a>
+        <a href="#" aria-label="Follow on LinkedIn" class="social-link">LinkedIn</a>
+        <a href="#" aria-label="Follow on Facebook" class="social-link">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 StartupX. All rights reserved.</div>
+  </footer>
+
+  <!-- ===== Minimal JS to trigger animation ===== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.card').forEach((card, i) => {
+        setTimeout(() => {
+          card.classList.add('animated');
+        }, i * 150);
+      });
+    });
+  </script>
+</body>
+</html>

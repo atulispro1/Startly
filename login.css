@@ -1,0 +1,426 @@
+/* ================================
+   GLOBAL VARIABLES
+================================ */
+:root {
+  --bg1: #07070b;
+  --neon-c1: #00f5ff;
+  --neon-c2: #ff4df0;
+  --neon-c3: #7a5cff;
+  --panel-dark: rgba(6, 8, 12, 0.85);
+}
+
+/* ================================
+   RESET & BASE
+================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background-size: 300% 300%;
+  animation: bgMove 8s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Background moving gradient */
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ================================
+   NEON BACKGROUND SQUARES
+================================ */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg .sq {
+  position: absolute;
+  border: 2px solid rgba(0, 255, 240, 0.25);
+  border-radius: 6px;
+  filter: drop-shadow(0 8px 20px rgba(0,255,240,0.06));
+  animation: float linear infinite;
+  will-change: transform, opacity;
+  opacity: 0.9;
+}
+
+/* Variant sizes, positions, and colors */
+.sq.s1 { width:48px; height:48px; left:6%; top:12%; animation-duration:18s; border-color:rgba(0,255,240,0.4); }
+.sq.s2 { width:70px; height:70px; left:18%; top:78%; animation-duration:22s; border-color:rgba(122,92,255,0.28); }
+.sq.s3 { width:40px; height:40px; left:78%; top:16%; animation-duration:16s; border-color:rgba(255,77,240,0.28); }
+.sq.s4 { width:90px; height:90px; left:86%; top:64%; animation-duration:26s; border-color:rgba(0,255,240,0.2); }
+.sq.s5 { width:36px; height:36px; left:46%; top:4%; animation-duration:20s; border-color:rgba(255,77,240,0.22); }
+.sq.s6 { width:110px; height:110px; left:8%; top:60%; animation-duration:30s; border-color:rgba(122,92,255,0.18); }
+.sq.s7 { width:30px; height:30px; left:60%; top:86%; animation-duration:14s; border-color:rgba(0,255,240,0.35); }
+.sq.s8 { width:56px; height:56px; left:34%; top:44%; animation-duration:21s; border-color:rgba(255,77,240,0.2); }
+
+/* Floating animation */
+@keyframes float {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); opacity:0.95; }
+  25%  { transform: translateY(-30px) rotate(12deg) scale(1.05); opacity:0.9;}
+  50%  { transform: translateY(-60px) rotate(24deg) scale(1); opacity:0.8;}
+  75%  { transform: translateY(-30px) rotate(36deg) scale(0.98); opacity:0.9;}
+  100% { transform: translateY(0) rotate(360deg) scale(1); opacity:0.95;}
+}
+
+/* ================================
+   PARTICLES CANVAS
+================================ */
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Click Ripple Effect */
+.click-ripple {
+  position: fixed;
+  pointer-events: none;
+  width: 40px; height: 40px;
+  margin-left: -20px;
+  margin-top: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #7a5cff88 0%, #ff4df044 60%, transparent 100%);
+  animation: ripple-burst 0.9s cubic-bezier(0.2,0.7,0.6,1);
+  z-index: 10001;
+}
+
+@keyframes ripple-burst {
+  0%   { transform: scale(0.6); opacity: 0.74; }
+  80%  { opacity: 0.15; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* ================================
+   AUTH WRAPPER & CARD
+================================ */
+.wrap {
+  position: relative;
+  width: 920px;
+  max-width: calc(100% - 48px);
+  min-height: 520px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 36px rgba(0,255,240,0.04) inset;
+  border: 1px solid rgba(255,255,255,0.02);
+}
+
+/* Neon border glow */
+.auth::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 26px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0,255,240,0.07), rgba(255,77,240,0.06), rgba(122,92,255,0.04));
+  box-shadow:
+    0 8px 40px rgba(0,255,240,0.06),
+    0 0 40px rgba(122,92,255,0.03);
+  mix-blend-mode: screen;
+  z-index: 1;
+}
+
+/* ================================
+   PANELS
+================================ */
+.panel {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(.2,.9,.3,1), opacity 0.5s;
+}
+
+.sign-in,
+.sign-up {
+  width: 50%;
+  padding: 64px 56px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-in { left: 0; }
+.sign-up { left: 0; opacity: 0; pointer-events: none; }
+
+/* Active state transitions */
+.right-active .sign-in {
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.right-active .sign-up {
+  transform: translateX(100%);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ================================
+   FORM CARD
+================================ */
+.card {
+  width: 100%;
+  max-width: 380px;
+  color: #cfeef3;
+  z-index: 4;
+}
+
+.card h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #dffcff;
+  margin-bottom: 14px;
+}
+
+.card p.lead {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 22px;
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.socials button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.04);
+  color: #dffcff;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4) inset;
+  transition: transform 0.16s;
+}
+.socials button:hover {
+  transform: translateY(-3px);
+}
+
+.field {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.field input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.35);
+  color: #eafcff;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5) inset;
+}
+.field input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.link-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0 18px;
+}
+.link-row a {
+  color: var(--neon-c1);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.cta {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-primary {
+  padding: 12px 36px;
+  border-radius: 24px;
+  border: none;
+  background: linear-gradient(90deg, var(--neon-c1), var(--neon-c2));
+  color: #051019;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0,255,240,0.12), 0 0 28px rgba(255,77,240,0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,255,240,0.18);
+}
+
+.ghost {
+  padding: 10px 30px;
+  border-radius: 24px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  color: #e8ffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ================================
+   OVERLAY
+================================ */
+.overlay-wrap {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+  transition: transform 0.7s cubic-bezier(.2,.9,.3,1);
+  border-left: 1px solid rgba(255,255,255,0.02);
+  border-radius: 0 30px 30px 0;
+}
+
+.overlay {
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(135deg, #00f0ff, #ff00ff, #00ff9f);
+  background-size: 300% 300%;
+  animation: neonGradient 6s ease infinite;
+  background-blend-mode: screen;
+  transition: transform 0.7s cubic-bezier(.2,.9,.3,1);
+  display: flex;
+}
+
+@keyframes neonGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.overlay-panel {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 48px;
+  color: white;
+}
+
+.overlay-panel h1 {
+  color: var(--neon-c1);
+  font-size: 36px;
+  text-shadow: 0 0 6px rgba(0,255,240,0.6),
+               0 0 18px rgba(0,255,240,0.25),
+               0 8px 30px rgba(0,0,0,0.6);
+  margin-bottom: 12px;
+}
+
+.overlay-panel p {
+  color: rgba(255,255,255,0.9);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* Active state */
+.right-active .overlay-wrap { transform: translateX(-100%); }
+.right-active .overlay { transform: translateX(50%); }
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width:880px) {
+  .auth { border-radius: 20px; }
+  .sign-in, .sign-up { padding: 40px 28px; }
+  .overlay-panel h1 { font-size: 28px; }
+  .wrap { padding: 16px; }
+}
+
+/* Mobile Toggle Buttons Styling */
+@media (max-width: 720px) {
+  .mobile-toggle {
+    display: flex;
+    justify-content: space-around;
+    margin: 16px 0;
+  }
+
+  .mobile-toggle button {
+    flex: 1;
+    padding: 12px 10px;
+    border: none;
+    background: rgba(255,255,255,0.08);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .mobile-toggle button.active {
+    background: linear-gradient(90deg, var(--neon-c1), var(--neon-c2));
+    color: #051019;
+  }
+
+  /* Stack forms vertically but only show one at a time */
+  .sign-in,
+  .sign-up {
+    width: 100% !important;
+    position: relative !important;
+    opacity: 1;
+    transform: none;
+    display: none; /* Hide both by default */
+  }
+
+  .sign-in.active,
+  .sign-up.active {
+    display: block; /* Show the selected form */
+  }
+
+  /* Hide overlay panel for mobile */
+  .overlay-wrap {
+    display: none !important;
+  }
+}
+/* Hide mobile toggle buttons by default (desktop view) */
+.mobile-toggle {
+  display: none;
+}
+
+/* Show toggle buttons only in mobile view */
+@media (max-width: 720px) {
+  .mobile-toggle {
+    display: flex;
+    justify-content: space-around;
+    margin: 16px 0;
+  }
+}
